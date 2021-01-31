@@ -23,13 +23,15 @@ class LandmarksController < ApplicationController
   get '/landmarks/:id/edit' do
     #binding.pry
     @landmark = Landmark.find_by_id(params[:id])
+
     erb :'/landmarks/edit'
   end
 
   patch '/landmarks/:id' do
     @landmark = Landmark.find_by_id(params[:id])
-    @landmark.name = params[:name]
-    @landmark.year_completed = params[:year_completed]
+    #binding.pry
+    @landmark.name = params[:landmark][:name]
+    @landmark.year_completed = params[:landmark][:year_completed]
     @landmark.save
   erb :'/landmarks/show'  
   end
