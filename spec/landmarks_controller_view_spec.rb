@@ -76,3 +76,4 @@ describe LandmarksController do
     expect(@updated_landmark.year_completed.to_s).to eq("9999")
   end
 end
+

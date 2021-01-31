@@ -12,7 +12,7 @@ class LandmarksController < ApplicationController
 
   post '/landmarks' do
     @landmark = Landmark.create(:name => params[:name], :year_completed => params[:year_completed])
-    redirect to '/landmarks/#{landmark.id}'
+    erb :'/landmarks/show'
   end
 
   get '/landmarks/:id' do
@@ -21,15 +21,17 @@ class LandmarksController < ApplicationController
   end
 
   get '/landmarks/:id/edit' do
-
-    erb :edit
+    #binding.pry
+    @landmark = Landmark.find_by_id(params[:id])
+    erb :'/landmarks/edit'
   end
 
   patch '/landmarks/:id' do
-
-
-
-  redirect to '/landmarks/#{landmark.id}'  
+    @landmark = Landmark.find_by_id(params[:id])
+    @landmark.name = params[:name]
+    @landmark.year_completed = params[:year_completed]
+    @landmark.save
+  erb :'/landmarks/show'  
   end
 
 end
